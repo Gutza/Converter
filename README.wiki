@@ -1,0 +1,5 @@
+= Converter =
+A browser extension for contextual unit and currency converter.
+
+== Brief History ==
+Converter has been the go-to Firefox extension for unit conversion [https://web.archive.org/web/20040511220250/http://converter.mozdev.org/ since January 2004] (yes, that was before [https://en.wikipedia.org/wiki/History_of_Firefox#Version_1.0 Firefox 1.0]). Currency conversion functionality was [http://www.the-converter.co/features_report.php?v=0.8.0 added in 2009].
