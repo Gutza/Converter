@@ -1,0 +1,96 @@
+<?xml version="1.0"?>
+<?xml-stylesheet href="chrome://converter/skin/toolbar.css" type="text/css"?>
+<overlay
+	id="ConverterOverlay"
+	xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+>
+
+	<!-- Scripts are actually loaded in this order -->
+	<script type="application/x-javascript" src="converter_init.js" />
+	<script type="application/x-javascript" src="converter_conversions.js" />
+        <script type="application/x-javascript" src="converter_util.js" />
+        <script type="application/x-javascript" src="converter_regression.js" />
+        <script type="application/x-javascript" src="converter_async.js" />
+	<!-- core after util -->
+        <script type="application/x-javascript" src="converter_core.js" />
+        <script type="application/x-javascript" src="converter_iface.js" />
+	<script type="application/x-javascript" src="converter_tz.js" />
+	<script type="application/x-javascript" src="converter_prefs.js" />
+	<script type="application/x-javascript" src="converter_prefs_iface.js" />
+	<script type="application/x-javascript" src="converter_currency.js" />
+	<script type="application/x-javascript" src="converter_currency_iface.js" />
+	<!-- static evaluator before premium -->
+	<script type="application/x-javascript" src="static_evaluator.js" />
+	<script type="application/x-javascript" src="converter_premium.js" />
+
+	<!-- this is the context menu item -->
+	<menupopup id="contentAreaContextMenu">
+		<menuitem
+			id="context_converterselect"
+			oncommand="MCE.iface.onConvert()"
+			insertafter="context-searchselect"
+			image="chrome://converter/skin/cv_stat_on.png"
+			class="menuitem-iconic"
+		/>
+	</menupopup>
+
+	<!-- this is the toolbar palette item -->
+	<toolbarpalette id="BrowserToolbarPalette">
+		<!-- this is the toolbar palette icon (button) -->
+		<toolbarbutton
+			id="converter_status"
+			oncommand="MCE.iface.fullPageFromStatus()"
+			label="Converter"
+			class="toolbaritem-1 chromeclass-toolbar-additional"
+			type="menu-button"
+			tooltiptext=""
+		>
+			<!-- this is the toolbar palette pop-up menu -->
+			<menupopup id="converter-status-popup">
+				<menuitem
+					id="converter-status-convertPage"
+					oncommand="MCE.iface.fullPageFromStatus(); event.stopPropagation();"
+					label="Convert page"
+					default="true"
+					image="chrome://converter/skin/cv_stat_on.png"
+					class="menuitem-iconic"
+				/>
+				<menuitem
+					id="converter-homepage"
+					oncommand="MCE.iface.showHome(); event.stopPropagation();"
+					label="Converter homepage (new tab)"
+					image="chrome://converter/skin/menu_homepage.png"
+					class="menuitem-iconic"
+				/>
+				<menuitem
+					id="converter-feedback"
+					oncommand="MCE.iface.showFeedback(); event.stopPropagation();"
+					label="Feedback (bugs, suggestions)"
+					image="chrome://converter/skin/menu_feedback.png"
+					class="menuitem-iconic"
+				/>
+				<menuitem
+					id="converter-buy-premium"
+					oncommand="MCE.iface.showLocation('http://www.the-converter.co/premium_version.php'); event.stopPropagation();"
+					label="Premium version"
+					image="chrome://converter/skin/menu_buy_premium.png"
+					class="menuitem-iconic"
+				/>
+				<menuitem
+					id="converter-status-convertWindow"
+					oncommand="MCE.iface.customConversionPopup(); event.stopPropagation();"
+					label="Custom conversion..."
+					image="chrome://converter/skin/menu_custom_conversion.png"
+					class="menuitem-iconic"
+				/>
+				<menuitem
+					id="converter-status-prefsWindow"
+					oncommand="MCE.iface.openPrefsWindow(); event.stopPropagation();"
+					label="Options..."
+					image="chrome://converter/skin/menu_options.png"
+					class="menuitem-iconic"
+				/>
+			</menupopup>
+		</toolbarbutton>
+	</toolbarpalette>
+</overlay>

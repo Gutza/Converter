@@ -1,0 +1,40 @@
+#converter_status {
+	list-style-image: url("chrome://converter/skin/cv_stat_off_24.png");
+}
+
+#converter_status.on {
+	list-style-image: url("chrome://converter/skin/cv_stat_on_24.png");
+}
+
+#converter_status.off {
+	list-style-image: url("chrome://converter/skin/cv_stat_off_24.png");
+}
+
+#converter_status.progress {
+	list-style-image: url("chrome://converter/skin/cv_stat_progress_24.png");
+}
+
+#converter_status.denied {
+	list-style-image: url("chrome://converter/skin/cv_stat_denied_24.png");
+}
+
+toolbar[iconsize="small"] #converter_status {
+	list-style-image: url("chrome://converter/skin/cv_stat_off.png");
+}
+
+toolbar[iconsize="small"] #converter_status.on {
+	list-style-image: url("chrome://converter/skin/cv_stat_on.png");
+}
+
+toolbar[iconsize="small"] #converter_status.off {
+	list-style-image: url("chrome://converter/skin/cv_stat_off.png");
+}
+
+toolbar[iconsize="small"] #converter_status.progress {
+	list-style-image: url("chrome://converter/skin/cv_stat_progress.png");
+}
+
+toolbar[iconsize="small"] #converter_status.denied {
+	list-style-image: url("chrome://converter/skin/cv_stat_denied.png");
+}
+

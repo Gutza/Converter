@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<RDF:RDF
+	xmlns:em="http://www.mozilla.org/2004/em-rdf#"
+	xmlns:NC="http://home.netscape.com/NC-rdf#"
+	xmlns:RDF="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+	<RDF:Description
+		RDF:about="rdf:#$qd7Kh"
+		em:id="{ec8030f7-c20a-464f-9b0e-13a3a9e97384}"
+		em:minVersion="4.0"
+		em:maxVersion="35.*"
+	/>
+	<RDF:Description
+		RDF:about="urn:mozilla:extension:file:converter.jar"
+		em:package="content/"
+	/>
+	<RDF:Description
+		RDF:about="urn:mozilla:install-manifest"
+		em:id="{converter@moongate.ro}"
+		em:version="1.3.0"
+		em:name="Converter"
+		em:description="Contextual unit, timezone, and currency converter."
+		em:creator="Bogdan Stancescu"
+		em:contributor="Przemyslaw Bialik (repackaging)"
+		em:homepageURL="http://www.the-converter.co/"
+		em:iconURL="chrome://converter/skin/converter.png"
+		em:optionsURL="chrome://converter/content/converterPrefDialog.xul"
+		em:unpack="true"
+	>
+		<em:targetApplication RDF:resource="rdf:#$qd7Kh"/>
+		<em:type>2</em:type>
+	</RDF:Description>
+</RDF:RDF>

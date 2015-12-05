@@ -1,0 +1,75 @@
+<?xml version="1.0"?>
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+
+<window
+	id="converter_custom_conversion"
+	xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+	title="Converter: Custom conversion"
+	onload="MCE.iface.custom_conversion_open()"
+	onfocus="window.document.getElementById('beef').select();"
+>
+
+    <script type="application/x-javascript" src="converter_init.js" />
+    <script type="application/x-javascript" src="converter_iface.js" />
+    <script type="application/x-javascript" src="converter_prefs.js" />
+    <script type="application/x-javascript" src="converter_prefs_iface.js" />
+
+    <vbox align="center" pack="center">
+      <command id="customConvert" oncommand="
+        MCE.iface.custom_conversion_convert();
+      " />
+      <command id="close" oncommand="
+	MCE.iface.custom_conversion_close();
+      " />
+      <command id="strict_switch" oncommand="
+         MCE.iface.custom_conversion_switch();
+         MCE.iface.custom_conversion_convert();
+      " />
+      <command id="options" oncommand="MCE.iface.openPrefsWindow();" />
+
+      <spacer height="10" />
+      <hbox>
+        <image src="chrome://converter/skin/custom_conversion_header.png"  />
+	<spacer width="10" />
+        <vbox flex="1">
+          <spacer flex="1"/>
+          <label style="font-size: 14pt" value="Custom conversion"/>
+          <spacer flex="1"/>
+        </vbox>
+      </hbox>
+      <spacer flex="1"/>
+      <groupbox orient="vertical">
+        <caption label="Data to convert" />
+        <textbox id="beef" multiline="true" rows="5" cols="70" />
+        <checkbox id="strict" label="Single conversion" checked="true" command="strict_switch" accesskey="S" />
+	<label style="font-size: 80%" value="Uncheck for full text conversion (e.g. when you paste text containing multiple measurements)." />
+      </groupbox>
+      <groupbox orient="vertical">
+        <caption label="Conversion result" />
+        <hbox height="30">
+          <vbox flex="1">
+            <hbox id="in_value_box">
+              <label style="font-size:80%; font-weight:bold" value="Input value:" />
+              <label style="font-size:80%" id="in_value" value="n/a" />
+            </hbox>
+            <hbox id="in_unit_box">
+              <label style="font-size:80%; font-weight:bold" value="Input unit:" />
+              <label style="font-size:80%" id="in_unit" value="n/a" />
+            </hbox>
+          </vbox>
+          <vbox pack='start'>
+            <!--
+              We need this vbox as a container, otherwise the
+              button itself is scaled vertically to fill the space.
+             -->
+            <button label="Options..." command="options" accesskey="O" />
+          </vbox>
+        </hbox>
+          <textbox id="hamburger" multiline="true" rows="5" cols="70" readonly="true" />
+      </groupbox>
+      <hbox>
+        <button label="Convert" command="customConvert" accesskey="C" />
+        <button label="Close" command="close" />
+      </hbox>
+    </vbox>
+</window>

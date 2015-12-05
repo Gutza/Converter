@@ -1,0 +1,425 @@
+<?xml version="1.0"?>
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+<?xml-stylesheet href="chrome://converter/skin/prefs.css" type="text/css"?>
+
+<window
+  id="converterPrefDialog"
+  xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+  xmlns:html="http://www.w3.org/1999/xhtml"
+  title="Converter Preferences"
+  onload="MCE.prefs.gui.prefsOnLoad()"
+  onunload="MCE.prefs.gui.close_cancel()"
+  onresize="MCE.prefs.gui.prefsOnResize()"
+>
+
+  <script type="application/x-javascript" src="converter_init.js" />
+  <script type="application/x-javascript" src="converter_async.js" />
+  <script type="application/x-javascript" src="converter_prefs.js" />
+  <script type="application/x-javascript" src="converter_prefs_iface.js" />
+  <script type="application/x-javascript" src="converter_prefs_gui.js" />
+  <script type="application/x-javascript" src="converter_util.js" />
+  <script type="application/x-javascript" src="converter_conversions.js" />
+  <script type="application/x-javascript" src="converter_core.js" />
+  <script type="application/x-javascript" src="converter_iface.js" />
+  <script type="application/x-javascript" src="converter_currency.js" />
+  <script type="application/x-javascript" src="converter_currency_iface.js" />
+
+  <command id='ok' oncommand='MCE.prefs.gui.close_ok();'/>
+  <command id='cancel' oncommand='MCE.prefs.gui.close_cancel();'/>
+  <command id='currency_change' oncommand='MCE.prefs.gui.initCurrencyControls();' />
+  <command id='update_interface' oncommand='MCE.prefs.gui.updateInterface();' />
+  <command id='buy_activate' oncommand='MCE.prefs.gui.buyActivate();' />
+  <command id='premium_info' oncommand='MCE.prefs.gui.premiumInfo();' />
+  <command id='switch_currencies' oncommand='MCE.prefs.gui.switchCurrencies();' />
+  <command id='tabswitched' oncommand='MCE.prefs.gui.tabSwitched();' />
+  <command id="custom_help" oncommand='MCE.prefs.gui.customHelp();' />
+  <command id="switchExpert" oncommand='MCE.prefs.gui.switchExpert();' />
+  <command id="preset_EU" oncommand='MCE.prefs.gui.doPreset("EU");' />
+  <command id="preset_US" oncommand='MCE.prefs.gui.doPreset("USA");' />
+  <command id="sync_basic_other" oncommand='MCE.prefs.gui.syncBasicOther()' />
+  
+  <hbox>
+    <vbox>
+      <tabbox style='margin:5px' id='tab-holder'>
+        <tabs id='tabs-holder'>
+          <tab label="Basic"        id="tab-basic-tab"   command="tabswitched" />
+          <tab label="Conversions"  id="tab-generic-tab" command="tabswitched" hidden="true" />
+          <tab label="Output"       id="tab-display-tab" command="tabswitched" hidden="true" />
+          <tab label="Interface"    id="tab-iface-tab"   command="tabswitched" hidden="true" />
+          <tab label="Premium"      id="tab-premium"     command="tabswitched" />
+          <tab label="Custom units" id="tab-custom-tab"  command="tabswitched" />
+        </tabs>
+        <tabpanels>
+          <tabpanel orient="vertical" id="tab-basic">
+            <groupbox>
+              <caption label="Generic unit presets" />
+              <description  width="300">
+                These are generic presets that make sweeping changes in a lot of places.
+                Use them the first time you start configuring Converter, and only use
+                them later on if you want to reset most of your preferences to a meaningful state
+                (that is, if you mess them up).
+              </description>
+              <hbox>
+                <button label="EU: SI, 24h, 1.000,00" command="preset_EU" image="chrome://converter/skin/region-EU.png" flex="1" />
+                <spacer width="5" />
+                <button label="USA: Imperial, 12h, 1,000.00" command="preset_US" image="chrome://converter/skin/region-USA.png" flex="1" />
+              </hbox>
+            </groupbox>
+            <groupbox>
+              <caption label="Currency preferences" />
+              <hbox>
+                <image class="pref-icon" src="chrome://converter/skin/pref_enable_currency.png" />
+                <checkbox id='pref_currency_enabled_basic' label="Enable currency conversions" command="currency_change" />
+              </hbox>
+              <spacer height='5' />
+              <hbox align='center'>
+                <label value="Preferred currency:" id='pref_myCurrencyLabel_basic' />
+                <spacer width="10"/>
+                <menulist id='pref_myCurrency_basic' command='currency_change' >
+                  <menupopup />
+                </menulist>
+              </hbox>
+            </groupbox>
+            <groupbox>
+              <caption label="Other options" />
+              <hbox>
+                <image class="pref-icon" src="chrome://converter/skin/pref_auto_convert.png" />
+                <checkbox id="pref_auto_convert_basic" label="Automatically convert all pages" command="sync_basic_other" />
+              </hbox>
+            </groupbox>
+          </tabpanel>
+          <tabpanel orient="vertical" id="tab-generic">
+            <groupbox>
+              <caption label="Unit conversion options" />
+              <hbox>
+                <image class="pref-icon" src="chrome://converter/skin/1cm.png" />
+                <checkbox id='pref_unit_enabled' label="Enable unit conversions" command="update_interface" />
+              </hbox>
+              <spacer height='5' />
+              <hbox>
+                <image class="pref-icon" src="chrome://converter/skin/converter_24x24.png"  />
+                <radiogroup id='pref_metric' orient='horizontal' command='update_interface'>
+                  <radio value='1' label='km/h' />
+                  <radio value='0' label='mph' />
+                </radiogroup>
+              </hbox>
+              <spacer height='5' />
+              <hbox>
+                <image class="pref-icon" src="chrome://converter/skin/converter_24x24.png"  />
+                <radiogroup id='pref_celsius' orient='horizontal'>
+                  <radio value='1' label='Celsius' />
+                  <radio value='0' label='Fahrenheit' />
+                </radiogroup>
+              </hbox>
+              <spacer height="5" />
+              <hbox>
+                <image class="pref-icon" src="chrome://converter/skin/pref_one_way.png" />
+                <checkbox id="pref_one_way" label="Only convert unfamiliar units" command='update_interface' />
+              </hbox>
+            </groupbox>
+            <groupbox>
+              <caption label="Time conversion options" />
+              <hbox>
+                <image class="pref-icon" src="chrome://converter/skin/clock.png" />
+                <checkbox id='pref_time_enabled' label="Enable timezone and time format conversions" command="update_interface" />
+              </hbox>
+              <spacer height='5' />
+              <hbox>
+                <image class="pref-icon" src="chrome://converter/skin/clock.png"  />
+                <radiogroup id='pref_24h' orient='horizontal'>
+                  <radio value='1' label='24h' />
+                  <radio value='0' label='12h' />
+                </radiogroup>
+              </hbox>
+            </groupbox>
+            <groupbox>
+              <caption label="Currency conversion options" />
+              <hbox>
+                <image class="pref-icon" src="chrome://converter/skin/pref_enable_currency.png" />
+                <checkbox id='pref_currency_enabled' label="Enable currency conversions" command="currency_change" />
+              </hbox>
+              <spacer height='5' />
+              <hbox align='center'>
+                <label value="Preferred currency:" id='pref_myCurrencyLabel' />
+                <spacer width="10"/>
+                <menulist id='pref_myCurrency' command='currency_change' >
+                  <menupopup />
+                </menulist>
+              </hbox>
+            </groupbox>
+          </tabpanel>
+          <tabpanel orient="vertical" id="tab-display">
+            <groupbox>
+              <caption label="Number format" />
+              <hbox>
+                <label value="Thousands separator:" id='pref_thou_sepLabel' />
+                <spacer width="10"/>
+                <menulist id='pref_thou_sep' command='update_interface'>
+                  <menupopup>
+                      <menuitem label=',' value=',' />
+                      <menuitem label=' ' value=' ' />
+                      <menuitem label='.' value='.' />
+                  </menupopup>
+                </menulist>
+              </hbox>
+              <hbox>
+                <label value="Decimal separator:" id='pref_dec_sepLabel' />
+                <spacer width="10"/>
+                <menulist id='pref_dec_sep' command='update_interface'>
+                  <menupopup>
+                    <menuitem label=',' value=',' />
+                    <menuitem label=' ' value=' ' />
+                    <menuitem label='.' value='.' />
+                  </menupopup>
+                </menulist>
+              </hbox>
+              <spacer height="5" />
+              <hbox>
+                <image class="pref-icon" src="chrome://converter/skin/1cm.png"  />
+                <radiogroup id='pref_in_fract' orient='horizontal'>
+                  <radio value='1' label="0'0-13/32&quot;" />
+                  <radio value='0' label='0.394 in' />
+                </radiogroup>
+              </hbox>
+            </groupbox>
+            <groupbox>
+              <caption label="Conversion display" />
+              <hbox>
+                <image class="pref-icon" src="chrome://converter/skin/pref_detail.png" />
+                <checkbox id="pref_only_show_converted" label="Don't confirm the value being converted" command='update_interface' />
+              </hbox>
+              <spacer height="5" />
+              <hbox>
+                <image class="pref-icon" src="chrome://converter/skin/pref_detail.png" />
+                <checkbox id="pref_replace_original" label="Replace original text" command='update_interface' />
+              </hbox>
+            </groupbox>
+          </tabpanel>
+          <tabpanel orient="vertical" id="tab-iface">
+            <groupbox>
+              <caption label="Auto-convert" />
+              <hbox>
+                <image class="pref-icon" src="chrome://converter/skin/pref_auto_convert.png" />
+                <checkbox id="pref_auto_convert" label="Automatically convert all pages" command="sync_basic_other" />
+              </hbox>
+            </groupbox>
+            <spacer height="5" />
+            <groupbox>
+              <caption label="Contextual default unit" />
+              <hbox align='center'>
+                <label id="label_default_unit" control="pref_default_unit" value="Default unit:" />
+                <spacer width="10" />
+                <textbox id="pref_default_unit" />
+              </hbox>
+              <description width="300">
+                Use this to specify a default unit for contextual conversions.
+                This can be useful if you encounter the same kind of units frequently,
+                and the Converter doesn't recognize them (e.g. if the unit is localized in your language).
+              </description>
+            </groupbox>
+            <spacer height="5" />
+            <groupbox>
+              <caption label="Interface options" />
+              <spacer height='5' />
+              <hbox>
+                <image class="pref-icon" src="chrome://converter/skin/pref_fullpage_menu.png" />
+                <checkbox id='pref_fullpage_menu' label="Show &quot;Convert the entire page&quot; in the contextual menu" tooltiptext="Controls whether the contextual menu should include the entry &quot;Convert the entire page&quot; when no text is selected" />
+              </hbox>
+              <spacer height='5' />
+              <hbox>
+                <image class="pref-icon" src="chrome://converter/skin/pref_selection_menu.png" />
+                <checkbox id='pref_selection_menu' label="Contextual conversion" tooltiptext="Controls whether the Converter should try to convert the selected text when the contextual menu is shown"  command='update_interface' />
+              </hbox>
+              <spacer height='5' />
+              <hbox>
+                <image class="pref-icon" src="chrome://converter/skin/pref_custom_convert_selection.png" />
+                <checkbox id='pref_custom_convert_selection' label="Custom convert selection" tooltiptext="Controls whether clicking on Converter's entry in the contextual menu should open the custom conversion window" />
+              </hbox>
+            </groupbox>
+          </tabpanel>
+          <tabpanel orient="vertical" id="tab-premium">
+            <groupbox>
+              <caption label="Activation" />
+              <hbox align='center'>
+                <label id="label_premium_key" control="premium_key" value="Activation key:" />
+                <spacer width="3" />
+                <textbox id="premium_key" width="300" oninput="MCE.prefs.gui.updateInterface()" />
+              </hbox>
+              <hbox align='center'>
+                <button label="What's this?" id="button_buy_activate" command="buy_activate" />
+                <spacer width="5" />
+                <caption id='label_activate' label="(Not activated)" />
+              </hbox>
+            </groupbox>
+            <groupbox>
+              <caption label="Precision" />
+              <hbox align='center'>
+                <image class="pref-icon" src="chrome://converter/skin/1cm.png"  />
+                <checkbox id="pref_enable_precision_units" label="Override precision for units: " command='update_interface' />
+                <textbox id="pref_precision_units" width="20" />
+                <caption label="digits" />
+              </hbox>
+              <spacer height="5" />
+              <hbox align='center'>
+                <image class="pref-icon" src="chrome://converter/skin/pref_enable_currency.png" />
+                <checkbox id="pref_enable_precision_currency" label="Override precision for currency: " command='update_interface' />
+                <textbox id="pref_precision_currency" width="20" />
+                <caption label="digits" />
+              </hbox>
+            </groupbox>
+            <groupbox>
+              <caption label="Secondary currency" />
+              <hbox align='center'>
+                <label value="Secondary currency:" id='pref_foreignCurrencyLabel' />
+                <spacer width="3" />
+                <menulist id='pref_foreignCurrency' command='update_interface' >
+                  <menupopup />
+                </menulist>
+              </hbox>
+              <button label="Switch secondary and primary currencies" id="button_switch_currency" command='switch_currencies' />
+            </groupbox>
+            <groupbox>
+              <caption label="Exchange rate cache" />
+              <hbox align="center">
+                <label control="pref_exchange_hours" value="Exchange rate cache duration" />
+                <spacer width="5" />
+                <textbox id="pref_exchange_hours" />
+              </hbox>
+              <description width="300">
+                How long before exchange rates are refreshed.
+                The value is specified in hours.
+              </description>
+            </groupbox>
+            <groupbox>
+              <caption label="Custom units" />
+              <hbox align='center'>
+                <image class="pref-icon" src="chrome://converter/skin/converter_24x24.png"  />
+                <checkbox id="pref_custom_enabled" label="Enable custom units" command='update_interface' />
+              </hbox>
+            </groupbox>
+          </tabpanel>
+          <tabpanel orient="vertical" id="tab-custom">
+            <vbox height="350" style="overflow:auto" id='custom-container'>
+              <vbox align="center" id='custom-premium'>
+                <spacer height="20"/>
+                <label value="This is a Premium feature." />
+                <button label="What's this?" id="button_buy_activate" command="buy_activate" />
+                <spacer height="20"/>
+              </vbox>
+              <vbox>
+                <groupbox id="custom0">
+                  <caption label="Custom unit #1" id="custom-label0" />
+                  <hbox align="center">
+                    <label value="Source:" />
+                    <textbox width="160" id="src0" />
+                    <label value="is"/>
+                    <menulist id="src_type0" oncommand="MCE.prefs.gui.browserWindow.MCE.premium.custom_units.gui.dropdown_change(document,event.target)">
+                      <menupopup>
+                        <menuitem label="an Imperial unit" value="I"/>
+                        <menuitem label="a metric unit" value="S"/>
+                        <menuitem label="an ambiguous unit" value="A"/>
+                        <menuitem label="a currency" value="C"/>
+                      </menupopup>
+                    </menulist>
+                  </hbox>
+                  <hbox align="center">
+                    <label value="Destination:" />
+                    <textbox width="136" id="dst0" />
+                    <label value="is"/>
+                    <menulist id="dst_type0" oncommand="MCE.prefs.gui.browserWindow.MCE.premium.custom_units.gui.dropdown_change(document,event.target)">
+                      <menupopup>
+                        <menuitem label="an Imperial unit" value="I"/>
+                        <menuitem label="a metric unit" value="S"/>
+                        <menuitem label="an ambiguous unit" value="A"/>
+                        <menuitem label="a currency" value="C"/>
+                      </menupopup>
+                    </menulist>
+                  </hbox>
+                  <hbox align="center">
+                    <label value="1 source unit = " id='src-text0' />
+                    <textbox type="number" decimalplaces="Infinity" hidespinbuttons="true" width="90" id="ratio0" />
+                    <label value="destination units" id='dst-text0' />
+                    <checkbox label="(reverse)" id="reverse0" oncommand="MCE.prefs.gui.browserWindow.MCE.premium.custom_units.gui.reverse(document,event.target);" />
+                  </hbox>
+                  <hbox>
+                    <checkbox label="Source is a regular expression" id="regular0" oncommand="MCE.prefs.gui.browserWindow.MCE.premium.custom_units.gui.regular(document,event.target);" />
+                    <checkbox label="Daisy chain conversion" id="daisy0" />
+                  </hbox>
+                  <vbox id="src-name-box0" hidden="true">
+                    <spacer height="5"/>
+                    <hbox align="center">
+                      <label value="Formal source name:" />
+                      <textbox id="src_name0" />
+                    </hbox>
+                  </vbox>
+                  <button label="Remove this custom unit" id="remove0" oncommand="MCE.prefs.gui.browserWindow.MCE.premium.custom_units.gui.remove_unit(document,event.target);" hidden="true" />
+                </groupbox>
+              </vbox>
+            </vbox>
+            <separator class="groove" />
+            <spacer height="5"/>
+	    <vbox align="center">
+	      <hbox>
+                <button label="Add custom unit" oncommand="MCE.prefs.gui.browserWindow.MCE.premium.custom_units.gui.add_unit(document);" id='add-custom' />
+	        <spacer width="5" />
+	        <button label="Save custom units" oncommand="MCE.prefs.gui.browserWindow.MCE.premium.custom_units.gui.save_custom(document);" id="save-custom" />
+	      </hbox>
+	    </vbox>
+          </tabpanel>
+        </tabpanels>
+      </tabbox>
+      <hbox pack='center'>
+        <button label="OK" command="ok" />
+        <button label="Cancel" command="cancel" />
+        <spacer width="50" />
+        <button id="but-switch-expert" label="Switch to advanced preferences" command="switchExpert" />
+      </hbox>
+    </vbox>
+    <hbox>
+      <groupbox width="300" id="info_container">
+        <caption label="Information" />
+        <vbox id='infobox' style='overflow: auto;' flex="1" />
+      </groupbox>
+      <groupbox width="300" id="help_container" >
+        <caption label="Custom units cheat sheet" />
+        <description>
+          Use this interface to define your own units.
+          <html:p>
+            <html:b>Source</html:b>: this is the unit you want to convert, e.g.
+            "cubic feet".
+          </html:p>
+          <html:p>
+            <html:b>Destination</html:b>: this is the unit you're familiar
+            with, e.g. "cubic metres".
+          </html:p>
+          <html:p>
+            <html:b>1 source unit = <html:i>xxx</html:i> destination
+            units</html:b>: specify the conversion ratio between the source and
+            destination units, e.g. 0.028316846592
+          </html:p>
+          <html:p>
+            If you're more familiar with the reverse conversion ratio, use the
+            <html:b>(reverse)</html:b> checkbox (e.g. if you find it more
+            recognizable to indicate that 1 cubic metre is 35.315 cubic feet,
+            for the same source and destination as above).
+          </html:p>
+          <html:p>
+            You can cover several input formats by using a <html:b>regular
+            expression</html:b> for the source. <html:u>Only use this option if
+            you understand regular expressions!</html:u> If you use this
+            option, you will be able to fill in a formal name for the source
+            unit.
+          </html:p>
+          <html:p>
+            <html:b>Daisy chain conversion</html:b>: check this box if you want
+            the Converter to try and further convert the destination
+            measurement.
+          </html:p>
+        </description>
+        <button label="Extensive help" command="custom_help" />
+      </groupbox>
+    </hbox>
+  </hbox>
+  <spacer height="5" />
+</window>
+

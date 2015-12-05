@@ -1,0 +1,8 @@
+content	converter	jar:chrome/converter.jar!/content/
+
+overlay	chrome://communicator/content/tasksOverlay.xul	chrome://converter/content/converterOverlay.xul
+overlay	chrome://browser/content/browser.xul	chrome://converter/content/converterOverlay.xul
+
+style chrome://global/content/customizeToolbar.xul	chrome://converter/skin/customization.css
+
+skin converter classic/1.0 jar:chrome/converter.jar!/skin/classic/
