@@ -18,5 +18,9 @@ As of December 2015, I decided to open source the code.
 I just don't have the time to tend to the code base as I used to, and I'm now mature enough to accept that it might just die if nobody cares enough to care for it enough.
 I'm willing to host the website, pay for the domain name, act as a hub for requests, and oversee code development – but only if the community needs the product, and wants me to continue performing any of those roles.
 I'm open sourcing both the formerly public and the formerly premium parts of the code.
-I'm positively willing to open source the server code for the premium part as well, if anyone is interested in any way to improve it – or to host it.
+I'm positively willing to open source the server code for the premium part as well, if anyone is interested in any way to improve it – or at the very least, to host it.
 
+As of December 2015, Mozilla requires extension signing – and Converter is not listed on AMO any more.
+As such, the entire code base is currently unusable, unless someone decides to care for it.
+I did my thing for the past 10 years – now it's up to you guys to decide if this is worth keeping or not.
+Your turn.
