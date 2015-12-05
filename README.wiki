@@ -3,3 +3,20 @@ A browser extension for contextual unit and currency converter.
 
 == Brief History ==
 Converter has been the go-to Firefox extension for unit conversion [https://web.archive.org/web/20040511220250/http://converter.mozdev.org/ since January 2004] (yes, that was before [https://en.wikipedia.org/wiki/History_of_Firefox#Version_1.0 Firefox 1.0]). Currency conversion functionality was [http://www.the-converter.co/features_report.php?v=0.8.0 added in 2009].
+
+The installed user base has seen highs and lows, from [https://web.archive.org/web/20111015105543/https://addons.mozilla.org/en-US/firefox/addon/converter/ 22k users] to [https://web.archive.org/web/20150904021825/https://addons.mozilla.org/en-US/firefox/addon/converter/ 10k users].
+
+During the autumn of 2015 I finally realized my proffessional and familial obligations became such that I wasn't able to single-handedly provide effective support for Converter any more.
+Not only that, but I was hanging on to an outdated business model, wherein I was effectively charging people for hosting a few bits of their data in an isolated system in the very midst of the coming of age for the cloud.
+
+Just as I was realizing this wasn't sustainable, during the same autumn of 2015, a Russian agency offered to buy the (then proprietary) Converter extension for $2,500.
+And yes, that was a solid offer, it's not just a number I'm speculating after the fact.
+Compared to the multi-million dollar deals we're used to see in the news, this was peanuts – but it would've been $2,500 more than what I'm getting by open-sourcing it.
+
+== December 2015 ==
+As of December 2015, I decided to open source the code.
+I just don't have the time to tend to the code base as I used to, and I'm now mature enough to accept that it might just die if nobody cares enough to care for it enough.
+I'm willing to host the website, pay for the domain name, act as a hub for requests, and oversee code development – but only if the community needs the product, and wants me to continue performing any of those roles.
+I'm open sourcing both the formerly public and the formerly premium parts of the code.
+I'm positively willing to open source the server code for the premium part as well, if anyone is interested in any way to improve it – or to host it.
+
